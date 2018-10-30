@@ -1,0 +1,6 @@
+#include "uuid.h"
+
+int main()
+{
+	return (0);
+}

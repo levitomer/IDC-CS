@@ -1,0 +1,108 @@
+THREAD
+	A thread is a single sequence stream of programmed instructions within in a process that can be 
+	managed independently by a scheduler.
+
+THREAD VS PROCESS
+	
+	processes are independent execution units that contain their own state information, use their 
+	own address spaces, and only interact with each other via interprocess communication mechanisms 
+	(generally managed by the operating system). 
+	Applications are typically divided into processes during the design phase, and a master process 
+	explicitly spawns sub-processes when it makes sense to logically separate significant 
+	application functionality. Processes, in other words, are an architectural construct.
+
+	By contrast, a thread is a coding construct that doesn't affect the architecture of an 
+	application. A single process might contains multiple threads. All threads within a process 
+	share the same state and same memory space, and can communicate with each other directly, 
+	because they share the same variables.
+
+	Threads typically are spawned for a short-term benefit that is usually visualized as a serial 
+	task, but which doesn't have to be performed in a linear manner mathematical computation using 
+	parallelism).
+	
+	The scope of a thread is within a specific code module—which is why we can bolt-on threading 
+	without affecting the broader application.
+
+	processes are typically independent, while threads exist as subsets of a process
+	
+	processes carry considerably more state information than threads, whereas multiple threads 
+	within a process share process state as well as memory and other resources
+	
+	processes have separate address spaces, whereas threads share their address space
+	
+	processes interact only through system-provided inter-process communication mechanisms
+	context switching between threads in the same process is typically faster than context 
+	switching between processes.
+
+WHEN TO USE A THREAD AND WHEN TO USE A PROCESS
+	
+	threads are popular way to improve application through parallelism.
+	Inter-thread communication (sharing data etc.) is significantly simpler to program than inter
+	process communication.
+
+	Context switches between threads are faster than between processes. That is, it's quicker for 
+	the OS to stop one thread and start running another than do the same with two processes.
+
+EXAMPLES
+
+	Doing lengthy processing: When a windows application is calculating it cannot process any more 
+	messages. As a result, the display cannot be updated.
+
+	Doing background processing: Some tasks may not be time critical, but need to execute 
+	continuously.
+
+	Doing I/O work: I/O to disk or to network can have unpredictable delays. Threads allow you to
+	ensure that I/O latency does not delay unrelated parts of your application
+
+MULTI-THREADED PROGRAM
+	A program that handles and executes a stream of tasks which independent to each other.
+
+MAIN PROBLEMS THAT MULTITHREADING CAN SOLVE
+
+	Improved application responsiveness - any program in which many activities are not dependent 
+	upon each other can be redesigned so that each activity is defined as a thread.
+
+	Improved program structure - many programs are more efficiently structured as multiple 
+	independent or semi-independent units of execution instead of as a single, monolithic thread. 
+	Multithreaded programs can be more adaptive to variations in demands than single threaded 
+	programs.
+
+	Uses fewer resources compared to multiple program tasks.
+
+COMMANDS
+
+	pthread_self() 		function returns the ID of the calling thread.
+	The  pthread_create()	function  starts  a  new  thread in the calling process. The new thread
+				starts execution by invoking start_routine(); arg is passed as the sole 
+				argument of start_routine().
+	pthread_create()	All of the threads in a process are peers: any thread can join with 
+				any other thread in the process. The function waits for the thread 
+				specified by thread to terminate. If that thread has already 
+				terminated, then pthread_join() returns immediately. The thread 
+				specified by thread must be joinable.
+	pthread_exit()		terminates the calling thread and returns a value via retval that 
+				(if the thread is joinable) is available to another thread in the same 
+				process that calls pthread_join(3).
+	
+	pthread_attr_init()	The  pthread_attr_init() function  initializes the thread attributes 
+				object pointed to by attr with default attribute values.
+	pthread_attr_destroy()	When a thread attributes object is no longer required, it 
+				should be destroyed using the pthread_attr_destroy() function.
+	pthread_attr_
+	setdetachstate () 	The pthread_attr_setdetachstate() function sets the detach state 					attribute of the thread attributes object referred to by attr to the 
+				value specified in detachstate. The detach state attribute determines 
+				whether a thread created using the thread attributes object attr will 
+				be created in a joinable or a detached state.
+	pthread_key_create()	The pthread_key_create() function shall create a thread-specific data 
+				key visible to all threads in the process. Key values provided are 
+				opaque objects used to locate thread-specific data.
+	pthread_key_delete()	delete a thread-specific data key previously returned by 
+		pthread_key_create(). The thread-specific data values associated with key need not be NULL at the time pthread_key_delete() is called.
+SEMAPHORE
+	Is a variable or abstract data type used to control access to a common resource by multiple 
+	processes in a concurrent system such as a multitasking operating system. Semaphore is simply a 
+	variable. This variable is used to solve critical section problems and to achieve process 
+	synchronization in the multi processing environment.
+
+
+

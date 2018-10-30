@@ -38,8 +38,8 @@ node_t* IterFlip(node_t *head)
 
 void RecFlip(node_t **head_ref)
 {
-	node_t *first;
-	node_t *other;
+	node_t *curr;
+	node_t *next;
 
 	/* empty list */
 	if (*head_ref == NULL)
@@ -47,23 +47,22 @@ void RecFlip(node_t **head_ref)
 		return;
 	}
 
-	first = *head_ref;
-	other = first->next;
+	curr = *head_ref;
+	next = curr->next;
 
-	/* Termintate when first is the last node */
-	if (other == NULL)
+	/* Termintate when curr is the last node */
+	if (next == NULL)
 	{
+		/* fix the head pointer */
+		*head_ref = curr;
 		return;
 	}
 
-	/* reverse the rest list and put the first element at the end */
-	RecFlip(&other);
-	/*swip the node after other to be first*/
-	first->next->next = first;
+	RecFlip(&next);
+	/*swip the node after next to be curr*/
+	curr->next->next = curr;
 	/* release the node */
-	first->next  = NULL;
-	/* fix the head pointer */
-	*head_ref = other;
+	curr->next = NULL;
 
 	return;
 }
